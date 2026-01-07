@@ -86,10 +86,12 @@ func instrumentHandler(endpoint string, handler http.HandlerFunc) http.HandlerFu
 
 func rootHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(map[string]string{
+	if err := json.NewEncoder(w).Encode(map[string]string{
 		"message": "Welcome to Demo App",
 		"version": version,
-	})
+	}); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
 }
 
 func healthHandler(w http.ResponseWriter, r *http.Request) {
@@ -100,14 +102,18 @@ func healthHandler(w http.ResponseWriter, r *http.Request) {
 		Uptime:    time.Since(startTime).String(),
 		Timestamp: time.Now().UTC().Format(time.RFC3339),
 	}
-	json.NewEncoder(w).Encode(response)
+	if err := json.NewEncoder(w).Encode(response); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
 }
 
 func readyHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(map[string]string{
+	if err := json.NewEncoder(w).Encode(map[string]string{
 		"status": "ready",
-	})
+	}); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
 }
 
 func infoHandler(w http.ResponseWriter, r *http.Request) {
@@ -125,5 +131,7 @@ func infoHandler(w http.ResponseWriter, r *http.Request) {
 		Environment: env,
 		Hostname:    hostname,
 	}
-	json.NewEncoder(w).Encode(response)
+	if err := json.NewEncoder(w).Encode(response); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
 }

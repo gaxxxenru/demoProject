@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(go mod tidy:*)",
-      "Bash(go test:*)"
+      "Bash(go test:*)",
+      "Bash(go vet:*)"
     ]
   }
 }
