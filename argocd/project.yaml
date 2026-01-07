@@ -6,7 +6,7 @@ metadata:
 spec:
   description: Demo App Project
   sourceRepos:
-    - https://github.com/vburtelov/demoProject.git
+    - https://github.com/gaxxxenru/demoProject.git
   destinations:
     - namespace: demo-app
       server: https://kubernetes.default.svc

@@ -23,7 +23,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: demo-app
-          image: ghcr.io/vburtelov/demo-app:latest
+          image: ghcr.io/gaxxxenru/demo-app:latest
           imagePullPolicy: Always
           ports:
             - name: http
