@@ -66,9 +66,16 @@ func main() {
 	http.HandleFunc("/info", instrumentHandler("info", infoHandler))
 	http.Handle("/metrics", promhttp.Handler())
 
+	server := &http.Server{
+		Addr:         ":" + port,
+		ReadTimeout:  10 * time.Second,
+		WriteTimeout: 10 * time.Second,
+		IdleTimeout:  120 * time.Second,
+	}
+
 	log.Printf("Starting server on port %s", port)
 	log.Printf("Version: %s", version)
-	if err := http.ListenAndServe(":"+port, nil); err != nil {
+	if err := server.ListenAndServe(); err != nil {
 		log.Fatalf("Server failed to start: %v", err)
 	}
 }
