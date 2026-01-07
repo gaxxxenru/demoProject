@@ -11,6 +11,8 @@ resources:
   - ingress.yaml
   - rollout.yaml
 
-commonLabels:
-  app.kubernetes.io/name: demo-app
-  app.kubernetes.io/managed-by: argocd
+labels:
+  - pairs:
+      app.kubernetes.io/name: demo-app
+      app.kubernetes.io/managed-by: argocd
+    includeSelectors: false
