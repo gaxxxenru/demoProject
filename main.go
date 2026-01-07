@@ -68,7 +68,6 @@ func main() {
 
 	log.Printf("Starting server on port %s", port)
 	log.Printf("Version: %s", version)
-
 	if err := http.ListenAndServe(":"+port, nil); err != nil {
 		log.Fatalf("Server failed to start: %v", err)
 	}
